@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http; // ✅ Correct import for API requests
+use App\Models\User;
 class AuthenticationController extends Controller
 {
     public function sendOtp(Request $request)
-    {
-        $validator = Validator::make($request->all(), [
+    {        $validator = Validator::make($request->all(), [
             'phone_number' => 'required|numeric|digits_between:10,15',
             'role' => 'required',
         ]);
@@ -40,24 +41,26 @@ class AuthenticationController extends Controller
     // Function to send OTP via WhatsApp API
     private function sendOtpToWhatsApp($phoneNumber, $otp)
     {
-        $whatsappApiUrl = "https://api.whatsapp.com/send"; // Replace with your API provider's URL
-        $whatsappApiToken = "YOUR_WHATSAPP_API_KEY"; // Replace with your API key
+        $whatsappApiUrl = "https://demo.digitalsms.biz/api/"; // DigitalSMS API URL
+        $whatsappApiKey = "145eea6b8729b1dabfea2d707a759ea9"; // Your API key
     
-        $message = "Your verification OTP is: *$otp*";
+        // Construct the message
+        $message = urlencode("Your verification OTP is: $otp");
     
-        $response = Http::post($whatsappApiUrl, [
-            'to' => $phoneNumber,
-            'type' => 'text',
-            'text' => ['body' => $message],
-            'access_token' => $whatsappApiToken,
-        ]);
+        // Build the request URL
+        $requestUrl = "{$whatsappApiUrl}?apikey={$whatsappApiKey}&mobile={$phoneNumber}&msg={$message}";
     
+        // Send request using HTTP Client
+        $response = Http::get($requestUrl);
+    
+        // Check response status
         if ($response->successful()) {
             return ['status' => true, 'message' => 'OTP sent via WhatsApp'];
         } else {
             return ['status' => false, 'message' => 'Failed to send OTP via WhatsApp'];
         }
-        }
+    }
+    
 
         public function verifyOtp(Request $request)
         {
@@ -97,6 +100,9 @@ class AuthenticationController extends Controller
                     'phone_number' => $user->phone_number,
                 ]
             ]);
+        }
+        public function test(){
+            echo "Hello Testing";
         }
         }
 
