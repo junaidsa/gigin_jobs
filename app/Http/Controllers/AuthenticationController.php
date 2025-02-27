@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http; // ✅ Correct import for API requests
+use Illuminate\Support\Facades\Http;
 use App\Models\User;
 class AuthenticationController extends Controller
 {
@@ -41,10 +41,8 @@ class AuthenticationController extends Controller
     // Function to send OTP via WhatsApp API
     private function sendOtpToWhatsApp($phoneNumber, $otp)
     {
-        $whatsappApiUrl = "https://demo.digitalsms.biz/api/"; // DigitalSMS API URL
-        $whatsappApiKey = "145eea6b8729b1dabfea2d707a759ea9"; // Your API key
-    
-        // Construct the message
+        $whatsappApiUrl = "https://demo.digitalsms.biz/api/"; 
+        $whatsappApiKey = "145eea6b8729b1dabfea2d707a759ea9"; 
         $message = urlencode("Your verification OTP is: $otp");
     
         // Build the request URL
