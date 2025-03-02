@@ -20,10 +20,6 @@ class ProfileController extends Controller
             'user' => $request->user(),
         ]);
     }
-
-    /**
-     * Update the user's profile information.
-     */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
         $request->user()->fill($request->validated());
