@@ -10,18 +10,25 @@
 			<!--navigation-->
 			<ul class="metismenu" id="menu">
 				<li>
-					<a href="javascript:;" class="has-arrow">
+					<a href="javascript:;" class="">
 						<div class="parent-icon icon-color-1"><i class="bx bx-home-alt"></i>
 						</div>
 						<div class="menu-title">Dashboard</div>
 					</a>
+				</li>
+				<li class="menu-label">App Settings</li>
+				<li>
+					<a href="javascript:;" class="has-arrow">
+						<div class="parent-icon icon-color-1"><i class="bx bx-donate-blood"></i>
+						</div>
+						<div class="menu-title">Category</div>
+					</a>
 					<ul>
-						<li> <a href="index.html"><i class="bx bx-right-arrow-alt"></i>Analytics</a>
+						<li> <a href="index.html"><i class="bx bx-right-arrow-alt"></i>Create</a>
 						</li>
-						<li> <a href="index2.html"><i class="bx bx-right-arrow-alt"></i>Sales</a>
+						<li> <a href="index2.html"><i class="bx bx-right-arrow-alt"></i>Category List</a>
 						</li>
 					</ul>
 				</li>
-				<li class="menu-label">App</li>
 			</ul>
 			<!--end navigation-->
